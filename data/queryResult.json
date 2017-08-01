@@ -1,0 +1,17 @@
+{
+  "event": 1,
+  "searchResult": [
+    {
+      "address": 111,
+      "markId": "id1"
+    },
+    {
+      "address": 222,
+      "markId": "id2"
+    },
+    {
+      "address": 333,
+      "markId": "id3"
+    }
+  ]
+}

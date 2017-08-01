@@ -1,0 +1,33 @@
+{
+    "status":0,
+    "rows":[
+      {"value":"a","text":"我是第一个"},
+      {"value":"b","text":"我是第二个"},
+      {"value":"b","text":"我是第三个"},
+      {"value":"b","text":"我是第四个"},
+      {"value":"b","text":"我是第五个"}
+    ],
+  "searchResult": [
+    {
+      "address": 111,
+      "markId": "id1",
+      "category": "entry",
+      "latitude":37,
+      "longitude":110
+    },
+    {
+      "address": 222,
+      "markId": "id2",
+      "category": "entry",
+      "latitude":36,
+      "longitude":112
+    },
+    {
+      "address": 333,
+      "markId": "id3",
+      "category": "entry",
+      "latitude":39,
+      "longitude":110
+    }
+  ]
+}
