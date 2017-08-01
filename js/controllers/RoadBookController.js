@@ -5,6 +5,8 @@
 app.controller('RoadBookController', function($scope, CommonService) {
     var map;
     var locationMarkers=[];
+    var latitude;
+    var longitude;
     window.mapCallback = function(){
         AMapUI.loadUI(['misc/PositionPicker'], function(PositionPicker){
             map = new AMap.Map('container', {
@@ -28,11 +30,14 @@ app.controller('RoadBookController', function($scope, CommonService) {
             positionPicker.start();
             map.panBy(0, 1);
             positionPicker.on('success', function(positionResult) {
-                //alert(positionResult.address)
+                $scope.centerInfo.longitude = positionResult.position.getLng();
+                $scope.centerInfo.latitude= positionResult.position.getLat();
+                $scope.centerInfo.address=positionResult.address;
             });
             positionPicker.on('fail', function(positionResult) {
-                alert("1")
+                //alert("1")
             });
+
 
         });
 
@@ -112,6 +117,37 @@ app.controller('RoadBookController', function($scope, CommonService) {
         }
     });
 
+
+
+
+    // 存放新增标记点的地址
+    $scope.centerInfo ={
+        "Latitude":-1,
+        "longitude":-1,
+        "address":-1
+    };
+
+
+    // 存放被点击的标记点的地址信息
+    $scope.choosedMark ={
+        "Latitude":-1,
+        "longitude":-1,
+        "address":-1
+    };
+
+
+    $scope.data = {
+        createdInfo: [],
+    };
+    $scope.panel = {
+        modalStatus: false,
+        parkingStatus: false,
+        cabinetStatus: false,
+        sideBarModalStatus: false,
+        infoState: false,
+        filterState: false,
+        infoListStatus: false
+    };
     // 根据选择类别的不同，每一类都设置一个监听事件
     // 为0.停车场 1.自提柜设定监听事件
     $scope.markIconClick = function(index) {
@@ -147,6 +183,7 @@ app.controller('RoadBookController', function($scope, CommonService) {
             $scope.$apply();}, 600);
     };
 
+
     $scope.switchInfoItemShowStatus = function(index) {
         if($scope.data.createdInfo[index].showStatus === null || $scope.data.createdInfo[index].showStatus === false) {
             $scope.data.createdInfo[index].showStatus = true;
@@ -164,18 +201,20 @@ app.controller('RoadBookController', function($scope, CommonService) {
     };
     // 发送给后台
 
-    $scope.data = {
-        createdInfo: [],
+    $scope.jumpToSingleMark = function (index) {
+        // 设置缩放级别和中心点
+        $scope.choosedMark.longitude=$scope.data.createdInfo[index].longitude;
+        $scope.choosedMark.latitude=$scope.data.createdInfo[index].latitude;
+        map.setZoomAndCenter(14, [$scope.choosedMark.longitude, $scope.choosedMark.latitude]);
+        // 在新中心点添加 markers
+        var marker = new AMap.Marker({
+            map: map,
+            position: [$scope.choosedMark.longitude, $scope.choosedMark.latitude]
+        });
+        $scope.hideInfoList()
+
     };
-    $scope.panel = {
-        modalStatus: false,
-        parkingStatus: false,
-        cabinetStatus: false,
-        sideBarModalStatus: false,
-        infoState: false,
-        filterState: false,
-        infoListStatus: false
-    };
+
 
     function loadInfoList() {
         CommonService.get('data/infoList.json').then(function(data){

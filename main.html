@@ -59,8 +59,8 @@
         <!--根据类别不同，添加标记点哪里会显示不同的内容-->
         <div id="parking" class="info-panel" ng-show="panel.parkingStatus">
             <h3>添加停车场标记</h3>
-            <div>坐标：<span id="coordinate"></span></div>
-            <div>地址：<span id="address"></span></div>
+            <div>坐标：<span id="coordinate">{{centerInfo.longitude| number:4}},{{centerInfo.latitude| number:4}}</span></div>
+            <div>地址：<span id="address">{{centerInfo.address}}</span></div>
             <textarea placeholder="这里写内容"></textarea>
             <div>
                 <button class="btn left-btn button button-glow button-rounded button-action">提交</button>
@@ -90,7 +90,12 @@
                 <div id="pendAuditList">
                     <!--使用列表显示所有的待审核信息-->
                     <div ng-repeat="item in data.createdInfo" class="info-list-item">
-                        <p ng-click="switchInfoItemShowStatus($index)">{{item.markId}}</p>
+                        <div>
+                            <div class="btn right-btn button button-glow button-tiny button-rounded button-caution float-right">删除</div>
+                            <div ng-click="jumpToSingleMark($index)"
+                                 class="btn right-btn button button-glow button-tiny button-rounded button-highlight float-right">跳转</div>
+                            <p ng-click="switchInfoItemShowStatus($index)">{{item.markId}}</p>
+                        </div>
                         <div class="info-list-sub-item" ng-show="item.showStatus">
                             <p>地址: {{item.address}}</p>
                             <p>类别: {{item.category}}</p>

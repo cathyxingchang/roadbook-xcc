@@ -11,17 +11,23 @@
     {
       "address": 111,
       "markId": "id1",
-      "category": "entry"
+      "category": "entry",
+      "latitude":37,
+      "longitude":110
     },
     {
       "address": 222,
       "markId": "id2",
-      "category": "entry"
+      "category": "entry",
+      "latitude":36,
+      "longitude":112
     },
     {
       "address": 333,
       "markId": "id3",
-      "category": "entry"
+      "category": "entry",
+      "latitude":39,
+      "longitude":110
     }
   ]
 }
