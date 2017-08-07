@@ -1,2 +1,4 @@
 # Created by .ignore support plugin (hsz.mobi)
-a
+.DS_Store
+.idea
+.idea/*
