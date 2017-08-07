@@ -1,49 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="160ae850-cd7b-4da8-b064-16dfa0059e3d" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/html/img/marker_inside_azure.png" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/css/main.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/infoList.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/queryResult.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/js/controllers/RoadBookController.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/js/main.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/login.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/skin/css/basic.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/skin/css/format.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/skin/css/style8.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/skin/images/code.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/skin/images/home_icon.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/skin/images/icon2b.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/skin/images/login_qq.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/skin/images/login_wb.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/skin/images/plugmenu1.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/skin/images/plugmenu2.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/skin/images/plugmenu3.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/skin/images/plugmenu4.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/skin/images/plugmenu5.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/skin/images/plugmenu6.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/skin/images/plugmenu8.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/skin/images/u_s1.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/skin/images/u_s2.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/skin/js/classie.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/skin/js/demo7.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/skin/js/jquery-1.7.2.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/skin/js/modernizr.custom.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/angular/angular-touch.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/angular/angular.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/angular/i8.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/buttons/buttons.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/buttons/buttons.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/font-awesome/font-css.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/font-awesome/i8.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/fonts/fontawesome-webfont.woff2" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/fonts/glyphicons-halflings-regular.woff2" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/jquery/jquery.min.js" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/RoadBookFront.iml" afterPath="$PROJECT_DIR$/.idea/RoadBookFront.iml" />
-    </list>
+    <list default="true" id="160ae850-cd7b-4da8-b064-16dfa0059e3d" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -403,12 +361,12 @@
       <option name="presentableId" value="Default" />
       <updated>1501644586347</updated>
       <workItem from="1501644588058" duration="18462000" />
-      <workItem from="1502027872736" duration="5074000" />
+      <workItem from="1502027872736" duration="5372000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="23536000" />
+    <option name="totallyTimeSpent" value="23834000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="0" />
