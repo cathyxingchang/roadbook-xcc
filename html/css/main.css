@@ -202,3 +202,14 @@ textarea {
 .float-right {
     float: right;
 }
+
+/* marker style*/
+
+.circle{
+    border-radius: 4px;
+    border: solid 1px silver;
+    padding: 7px;
+    text-align: center;
+    line-height: 18px;
+    color:white;
+}
