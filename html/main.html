@@ -62,7 +62,7 @@
             <h3>添加停车场标记</h3>
             <div>坐标：<span id="coordinate">{{centerInfo.longitude| number:4}},{{centerInfo.latitude| number:4}}</span></div>
             <div>地址：<span id="address">{{centerInfo.address}}</span></div>
-            <textarea placeholder="这里写内容" ng-model="data.comment"></textarea>
+            <textarea placeholder="这里写内容～" ng-model="newMarkData.comment"></textarea>
             <div>
                 <button class="btn left-btn button button-glow button-rounded button-action" ng-click="createSingleMark('ENTRY')">提交</button>
                 <button class="btn right-btn button button-glow button-rounded button-caution" ng-click="cancelButtonClick()">取消</button>
@@ -90,7 +90,7 @@
                 <div>number: 123456</div>
                 <div id="pendAuditList">
                     <!--使用列表显示所有的待审核信息-->
-                    <div ng-repeat="item in data.createdInfo" class="info-list-item">
+                    <div ng-repeat="item in data.createdMarks" class="info-list-item">
                         <div>
                             <div class="btn right-btn button button-glow button-tiny button-rounded button-caution float-right">删除</div>
                             <div ng-click="jumpToSingleMark($index)"
@@ -98,7 +98,7 @@
                             <p ng-click="switchInfoItemShowStatus($index)">{{item.markId}}</p>
                         </div>
                         <div class="info-list-sub-item" ng-show="item.showStatus">
-                            <p>地址: {{item.address}}</p>
+                            <p>内容: {{item.additionalInfo.comment}}</p>
                             <p>类别: {{item.category}}</p>
                         </div>
                     </div>

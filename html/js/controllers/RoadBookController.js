@@ -19,7 +19,7 @@ app.controller('RoadBookController', function($scope, CommonService) {
             map.plugin(["AMap.ToolBar"], function() {
                 map.addControl(new AMap.ToolBar());
             });
-            /*添加一个固定不动的选址组件,固定在地图中心*/
+            /* 添加一个固定不动的选址组件,固定在地图中心 */
             var positionPicker = new PositionPicker({
                 mode:'dragMap',//设定为拖拽地图模式，可选'dragMap'、'dragMarker'，默认为'dragMap'
                 map:map,        //依赖地图对象
@@ -43,12 +43,12 @@ app.controller('RoadBookController', function($scope, CommonService) {
             /**
              * 为地图添加信息窗体,(到这个点去，从这个点出发)
              */
-            content = '<div class="info-title">信息</div><div class="info-content">' +
+            var contentMsg = '<div class="info-title">信息</div><div class="info-content">' +
                 '<img src="/html/img/smile.png">' +
                 '这里可以显示当前点的信息<br/>' +
                 '</div>';
             infoWindow = new AMap.AdvancedInfoWindow({
-                content: content,
+                content: contentMsg,
                 placeSearch: false,
                 asDestination: true,
                 offset: new AMap.Pixel(0, -30)
@@ -113,7 +113,8 @@ app.controller('RoadBookController', function($scope, CommonService) {
                     offset: new AMap.Pixel(-12,-12),
                     zIndex: 101,
                     //title: markSet[i].name,
-                    map: map
+                    map: map,
+                    extData:markSet[i].markId
                 });
                 //map.setCenter(marker.getPosition());
             }
@@ -123,7 +124,8 @@ app.controller('RoadBookController', function($scope, CommonService) {
                     offset: new AMap.Pixel(-12,-12),
                     zIndex: 101,
                     //title: markSet[i].name,
-                    map: map
+                    map: map,
+                    extData:markSet[i].markId
                 });
             }
             else if (markSet[i].category == 'COMMUNITY' && markSet[i].level<=zoomSize ){
@@ -134,10 +136,11 @@ app.controller('RoadBookController', function($scope, CommonService) {
                 marker = new AMap.Marker({
                     content: div,
                     title:'community',
-                    position: [markSet[i].longitude,markSet[i].latitude],
+                    position: [markSet[i].longitude, markSet[i].latitude],
                     offset: new AMap.Pixel(-24, 5),
                     zIndex: 101,
-                    map: map
+                    map: map,
+                    extData:markSet[i].markId
                 });
             }
             else {
@@ -148,18 +151,22 @@ app.controller('RoadBookController', function($scope, CommonService) {
                 // 为每个点添加点击事件
                 marker.content = '我的类型是' + markSet[i].category;
                 marker.on('click', markerClick);
-                //marker.emit('click', {target: marker});
             }
         }
     }
 
-
+    /**
+     * mark的点击事件
+     * 在点击mark点后，显示信息窗体infoWindow
+     */
     function markerClick(e) {
-        /**
-         * 在点击mark点后，显示信息窗体infoWindow
-         */
         //infoWindow.setContent(e.target.content);
+        // 打开信息窗体
         infoWindow.open(map, e.target.getPosition());
+        // 记录点击mark点的事件
+        console.log("点击啦");
+        console.log(e.target.getExtData());
+        addClickRecord(e.target.getExtData())
     }
 
     function showPointMarker(lng,lat) {
@@ -242,15 +249,45 @@ app.controller('RoadBookController', function($scope, CommonService) {
     };
 
 
-    // 存放当前所有的mark点信息
+    /**
+     * 存放当前所有的mark点信息
+     * 所有绘制在图上的点都在allMarkSet里
+     * $scope.allMarkSet
+     * 存放根据"经纬度信息"反馈回来的mark点
+     */
     $scope.allMarkSet = {
         markList:{},
     };
 
+
+    /**
+     * $scope.data
+     *  存放当前用户id所创建的所有的点（用于列表的跳转使用）
+     * @type {{createdInfo: Array, marks: Array}}
+     */
     $scope.data = {
         createdInfo: [],
-        comment:"0"
+        createdMarks:[{
+                "additionalInfo": {
+                    "comment": "1212",
+                    "timeInterval": "北京市朝阳区八里庄街道延静里西街华商大厦"
+                },
+                "category": "ENTRY",
+                "latitude": 39.915852,
+                "level": 0,
+                "longitude": 116.481898,
+                "markId": "913f6642-428b-4425-b1ee-f7e599ea3be7"
+            },]
     };
+
+    /**
+     *  $scope.newMark
+     *  存放新mark点的comment信息
+     * @type {{comment: string}}
+     */
+    $scope.newMarkData ={
+        comment:"这里存放信息"
+    }
     $scope.panel = {
         modalStatus: false,
         parkingStatus: false,
@@ -297,10 +334,10 @@ app.controller('RoadBookController', function($scope, CommonService) {
 
 
     $scope.switchInfoItemShowStatus = function(index) {
-        if ($scope.data.createdInfo[index].showStatus === null || $scope.data.createdInfo[index].showStatus === false) {
-            $scope.data.createdInfo[index].showStatus = true;
+        if ($scope.data.createdMarks[index].showStatus === null || $scope.data.createdMarks[index].showStatus === false) {
+            $scope.data.createdMarks[index].showStatus = true;
         } else {
-            $scope.data.createdInfo[index].showStatus = false;
+            $scope.data.createdMarks[index].showStatus = false;
         }
     };
 
@@ -336,13 +373,12 @@ app.controller('RoadBookController', function($scope, CommonService) {
          * @type {{category: *, markInfo: {latitude: (*), longitude: (*), category: *, additionalInfo: {comment: string, timeInterval: (*)}, level: number}, contributorId: string, cookies: string}}
          */
         var param = {
-            "category": category,
             "markInfo": {
                 "latitude": $scope.centerInfo.latitude,
                 "longitude": $scope.centerInfo.longitude,
                 "category": category,
                 "additionalInfo": {
-                    "comment": $scope.data.comment,
+                    "comment": $scope.newMarkData.comment,
                     "timeInterval": $scope.centerInfo.address
                 },
                 "level": 1
@@ -350,6 +386,7 @@ app.controller('RoadBookController', function($scope, CommonService) {
             "contributorId": "foo",
             "cookies": "foo"
         };
+
         var target_activity_service = "CreateSingleMark";
         CommonService.post(API_URL, param, target_activity_service).then(function(data){
             if(data.state === 1) {
@@ -369,6 +406,22 @@ app.controller('RoadBookController', function($scope, CommonService) {
     }
 
 
+    function loadUncheckedList() {
+        /**
+         * 后台加载当前这个人的所添加的所有的标记点的信息
+         * 添加了但是未被审核的
+         */
+        var input_data = {
+            "userId": "xingchang0801"
+        };
+        var target_activity_service = "SearchMarkByUserId";
+        CommonService.post(API_URL,input_data,target_activity_service).then(function(data){
+            if(data.state === 1) {
+                $scope.data.createdMarks = data.markList.marks;
+                console.log($scope.data.createdMarks);
+            }
+        });
+    }
     function loadMarkByLocation(latitude,longitude,latitudeRange,longitudeRange,zoomSize) {
         /**
          * 从后台的server里拿数据 调用使用位置信息作为server
@@ -390,8 +443,34 @@ app.controller('RoadBookController', function($scope, CommonService) {
         });
     }
 
+    function addClickRecord(markId) {
+        /**
+         * 把点击mark点的信息记录在数据库里
+         */
+        var input_data = {
+            "markId": markId,
+            "userId": 'xingchang0809'
+        };
+        var target_activity_service = "AddClickRecord";
+        CommonService.post(API_URL,input_data,target_activity_service).then(function(data){
+            if(data.state === 1) {
+                console.log(data.state);
+                console.log("点击了mark点，记录");
+                var result = data.description;
+                console.log(result);
+            }
+            else{
+                console.log(data.state);
+                var result = data.description;
+                console.log(result);
+                console.log("点击事件记录失败")
+            }
+        });
+    }
+
     function init() {
         loadInfoList();
+        loadUncheckedList();
     }
     init();
 });
